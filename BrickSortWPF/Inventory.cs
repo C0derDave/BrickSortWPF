@@ -17,7 +17,7 @@ namespace BrickSortWPF
         /// <summary>
         /// Create an Inventory object with a list of Part objects.
         /// </summary>
-        /// <param name="setID"></param>
+        /// <param name="setID">The LEGO® set ID to make an inventory for.</param>
         public Inventory(string setID)
         {
             Parts = new List<Part>();
