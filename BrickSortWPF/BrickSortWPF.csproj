@@ -72,8 +72,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Inventory.cs" />
-    <Compile Include="InventoryViewModel.cs" />
+    <Compile Include="Model\Inventory.cs" />
+    <Compile Include="ViewModel\InventoryViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -88,11 +88,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Part.cs" />
+    <Compile Include="Model\Part.cs" />
     <Compile Include="PartControl.xaml.cs">
       <DependentUpon>PartControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PartViewModel.cs" />
+    <Compile Include="ViewModel\PartViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

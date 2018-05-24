@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-namespace BrickSortWPF
+namespace BrickSortWPF.ViewModel
 {
     public class PartViewModel : INotifyPropertyChanged
     {
