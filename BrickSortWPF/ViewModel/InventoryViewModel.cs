@@ -5,7 +5,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace BrickSortWPF.ViewModel
 {
@@ -15,25 +18,40 @@ namespace BrickSortWPF.ViewModel
 
         private Inventory Inventory { get; set; }
 
+
+    
         /// <summary>
         /// Create an InventoryViewModel with a list of PartViewModel objects.
         /// </summary>
-        /// <param name="setID">The LEGO® set ID to make an inventory for.</param>
-        public InventoryViewModel(string setID)
+        public InventoryViewModel()
         {
-            Inventory = new Inventory(setID);
             Parts = new ObservableCollection<PartViewModel>();
-
-            InitializePartsList();
+            Inventory = new Inventory();
         }
 
-        private void InitializePartsList()
+        public void LoadSet(string setID)
         {
-            Parts.Clear();
-            foreach(Part part in Inventory.Parts)
+            bool b = Inventory.LoadSet(setID);
+            Thread.Sleep(0);
+
+            Application.Current.Dispatcher.Invoke(new System.Action(() =>
             {
-                Parts.Add(new PartViewModel(part.Name, part.ID, part.RequiredQuantity, part.ImageURL));
-            }
+                Parts.Clear();
+                foreach(Part part in Inventory.Parts)
+                {
+                    Parts.Add(new PartViewModel(part.Name, part.ID, part.RequiredQuantity, part.ImageURL));
+                }
+            }));
+            
+            /*for(int i = 0; i < Inventory.Parts.Count; i++)
+            {
+                Part part = Inventory.Parts[i];
+
+                if (Parts.Count <= i)
+                    Parts.Add(new PartViewModel(part.Name, part.ID, part.RequiredQuantity, part.ImageURL));
+                else
+                    Parts[i] = new PartViewModel(part.Name, part.ID, part.RequiredQuantity, part.ImageURL);
+            }*/
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

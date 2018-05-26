@@ -32,7 +32,13 @@ namespace BrickSortWPF
             OpenSetDialog dialog = new OpenSetDialog();
             if (dialog.ShowDialog() == true)
             {
-                DataContext = new InventoryViewModel(dialog.ResponseText);
+                string setID = dialog.ResponseText;
+                ((InventoryViewModel)DataContext).LoadSet(setID);
+                Action action = (() =>
+                {
+                    ((InventoryViewModel)DataContext).LoadSet(setID);
+                });
+                this.Dispatcher.BeginInvoke(action);
             }
         }
     }

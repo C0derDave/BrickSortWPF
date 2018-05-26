@@ -17,14 +17,10 @@ namespace BrickSortWPF.Model
         /// <summary>
         /// Create an Inventory object with a list of Part objects.
         /// </summary>
-        /// <param name="setID">The LEGO® set ID to make an inventory for.</param>
-        public Inventory(string setID)
+        public Inventory()
         {
             Parts = new List<Part>();
             _apiKey = LoadAPIKey();
-
-            string url = "https://rebrickable.com/api/v3/lego/sets/" + setID + "/parts/";
-            ParseJSON(DownloadJSON(url));
         }
 
         private string LoadAPIKey()
@@ -33,14 +29,24 @@ namespace BrickSortWPF.Model
             return streamReader.ReadLine();
         }
 
+        public bool LoadSet(string setID)
+        {
+            Parts.Clear();
+            string url = "https://rebrickable.com/api/v3/lego/sets/" + setID + "/parts/";
+            string json = DownloadJSON(url);
+            ParseJSON(json);
+
+            return true;
+        }
+
         private string DownloadJSON(string url)
         {
             HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
             webRequest.Method = "GET";
             webRequest.Headers["Authorization"] = "key " + _apiKey;
             webRequest.Accept = "application/json";
-            Stream stream = webRequest.GetResponse().GetResponseStream();
-            StreamReader reader = new StreamReader(stream);
+            WebResponse webResponse = webRequest.GetResponse();
+            StreamReader reader = new StreamReader(webResponse.GetResponseStream());
 
             string line = "";
             string content = "";
@@ -60,7 +66,8 @@ namespace BrickSortWPF.Model
             JToken next = obj["next"];
             if(next.Type != JTokenType.Null)
             {
-                ParseJSON(DownloadJSON(next.ToString()));
+                string downloadedJson = DownloadJSON(next.ToString());
+                ParseJSON(downloadedJson);
             }
 
             JArray parts = (JArray)obj["results"];
