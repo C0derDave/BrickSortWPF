@@ -29,9 +29,9 @@ namespace BrickSortWPF.ViewModel
             Inventory = new Inventory();
         }
 
-        public void LoadSet(string setID)
+        public async Task LoadSet(string setID)
         {
-            bool b = Inventory.LoadSet(setID);
+            bool b = await Task.Run(() => Inventory.LoadSet(setID));
             Thread.Sleep(0);
 
             Application.Current.Dispatcher.Invoke(new System.Action(() =>
@@ -42,16 +42,6 @@ namespace BrickSortWPF.ViewModel
                     Parts.Add(new PartViewModel(part.Name, part.ID, part.RequiredQuantity, part.ImageURL));
                 }
             }));
-            
-            /*for(int i = 0; i < Inventory.Parts.Count; i++)
-            {
-                Part part = Inventory.Parts[i];
-
-                if (Parts.Count <= i)
-                    Parts.Add(new PartViewModel(part.Name, part.ID, part.RequiredQuantity, part.ImageURL));
-                else
-                    Parts[i] = new PartViewModel(part.Name, part.ID, part.RequiredQuantity, part.ImageURL);
-            }*/
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

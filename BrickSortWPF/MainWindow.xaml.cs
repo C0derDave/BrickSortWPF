@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,23 +23,21 @@ namespace BrickSortWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        static string CurrentSetID { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private async void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             OpenSetDialog dialog = new OpenSetDialog();
             if (dialog.ShowDialog() == true)
             {
-                string setID = dialog.ResponseText;
-                ((InventoryViewModel)DataContext).LoadSet(setID);
-                Action action = (() =>
-                {
-                    ((InventoryViewModel)DataContext).LoadSet(setID);
-                });
-                this.Dispatcher.BeginInvoke(action);
+                CurrentSetID = dialog.ResponseText;
+
+                await ((InventoryViewModel)DataContext).LoadSet(CurrentSetID);
             }
         }
     }
