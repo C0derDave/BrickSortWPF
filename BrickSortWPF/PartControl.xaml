@@ -27,8 +27,8 @@
         <StackPanel Grid.Column="2" Grid.ColumnSpan="4" MinHeight="50" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Name="part_required_quantity" VerticalAlignment="Center" MaxWidth="50" MinWidth="50" FontSize="18px" HorizontalAlignment="Right" Text="{Binding RequiredQuantity, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Name="part_quantity" VerticalAlignment="Center" MaxWidth="50" MinWidth="50" FontSize="18px" HorizontalAlignment="Right" Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"/>
-            <Button Name="part_increase" Content="+" FontSize="22" MaxWidth="50" MinWidth="50" HorizontalAlignment="Right" Command="{Binding Path=AddCommand}"/>
-            <Button Name="part_decrease" Content="-" FontSize="22" MaxWidth="50" MinWidth="50" HorizontalAlignment="Right" Command="{Binding Path=RemoveCommand}"/>
+            <Button Name="part_increase" Content="+" FontSize="22" MaxWidth="50" MinWidth="50" HorizontalAlignment="Right" Command="{Binding AddCommand}"/>
+            <Button Name="part_decrease" Content="-" FontSize="22" MaxWidth="50" MinWidth="50" HorizontalAlignment="Right" Command="{Binding RemoveCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

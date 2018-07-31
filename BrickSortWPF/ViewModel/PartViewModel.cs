@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrickSortWPF.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,14 +12,15 @@ namespace BrickSortWPF.ViewModel
 {
     public class PartViewModel : INotifyPropertyChanged
     {
-        public string Name { get; set; }
+        private Part _part;
 
-        /// <summary>
-        /// The ID of the part, so, in this case, the actual numerical ID of the part + the part color in order to keep it unique.
-        /// </summary>
-        public string ID { get; set; }
+        public string Name { get; set; }
+        
+        public string UniqueID { get; set; }
 
         public int RequiredQuantity { get; set; }
+
+        public string Color { get; set; }
 
         private int _quantity;
         public int Quantity
@@ -33,6 +35,8 @@ namespace BrickSortWPF.ViewModel
                 OnPropertyChanged(nameof(Quantity));
             }
         }
+
+        public string ImageURL { get; set; }
 
         private BitmapImage _image;
         public BitmapImage Image
@@ -75,20 +79,16 @@ namespace BrickSortWPF.ViewModel
             }
         }
 
-        /// <summary>
-        /// Create a PartViewModel.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="id">This parameter would be the numerical part ID + the part color.</param>
-        /// <param name="requiredQuantity"></param>
-        /// <param name="imageURL"></param>
-        public PartViewModel(string name, string id, int requiredQuantity, string imageURL)
+        public PartViewModel(string name, string id, string color, int requiredQuantity, string imageURL)
         {
+            //_part = part;
             Name = name;
-            ID = id;
+            UniqueID = id;
+            Color = color;
             Quantity = 0;
             RequiredQuantity = requiredQuantity;
 
+            ImageURL = imageURL;
             Uri uri = new Uri(imageURL, UriKind.Absolute);
             Image = new BitmapImage(uri);
             OnPropertyChanged(nameof(Image));
@@ -97,6 +97,7 @@ namespace BrickSortWPF.ViewModel
         public void Add()
         {
             Quantity++;
+            //_part.Quantity++;
         }
 
         public void Remove()
@@ -104,6 +105,7 @@ namespace BrickSortWPF.ViewModel
             if (Quantity > 0)
             {
                 Quantity--;
+                //_part.Quantity--;
             }
         }
 

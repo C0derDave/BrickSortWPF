@@ -60,6 +60,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BrickSort\InventoryDownloader.cs" />
     <Compile Include="OpenSetDialog.xaml.cs">
       <DependentUpon>OpenSetDialog.xaml</DependentUpon>
     </Compile>

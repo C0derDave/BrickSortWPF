@@ -19,7 +19,8 @@
         
         <Menu DockPanel.Dock="Top" Grid.Row="0">
             <MenuItem Header="_BrickSort">
-                <MenuItem Header="_Open" Click="MenuItem_Click"/>
+                <MenuItem Header="_Open" Click="OpenButton_Click"/>
+                <MenuItem Header="_Sort By Quantity" IsCheckable="True" Command="{Binding SortByQuantityCommand}"/>
             </MenuItem>
         </Menu>
 

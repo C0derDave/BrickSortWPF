@@ -30,7 +30,7 @@ namespace BrickSortWPF
             InitializeComponent();
         }
 
-        private async void MenuItem_Click(object sender, RoutedEventArgs e)
+        private async void OpenButton_Click(object sender, RoutedEventArgs e)
         {
             OpenSetDialog dialog = new OpenSetDialog();
             if (dialog.ShowDialog() == true)
